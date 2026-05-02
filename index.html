@@ -21,7 +21,7 @@
         }
 
         /* 1. STATE MANAGEMENT (Hiding/Showing Views) */
-        .view-home { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; }
+        .view-home { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 97.511469999vh; }
         .view-results { display: none; }
 
         body.results-active .view-home { display: none; }
@@ -83,10 +83,11 @@
 <body>
 
     <!-- HOME VIEW -->
+        <small><small><small><h6>Powered by Google</h6></small></small></small>
     <div id="home-state" class="view-home">
-        <div class="home-logo">Search</div>
+        <div class="home-logo">Search</DIV>
         <div class="search-box">
-            <input type="text" id="home-input" class="search-input" placeholder="Search across web intelligence..." autofocus>
+            <input type="text" id="home-input" class="search-input" placeholder="Search..." autofocus>
             <div class="search-trigger" onclick="runSearch('home-input')">
                 <img class="searchicon" src="https://static.vecteezy.com/system/resources/previews/015/337/677/original/transparent-search-icon-free-png.png" width="45px" style="margin-right:-10px;">
             </div>
