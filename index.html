@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Search</title>
-    <link rel="icon" type="image/png" href="https://static.vecteezy.com/system/resources/previews/015/337/677/original/transparent-search-icon-free-png.png">
+    <link rel="icon" type="image/svg" href="https://pub-ac397c96ae2647d4a45221e91f4ce5dd.r2.dev/i4KL1ku3j2.html">
     <style>
         :root {
             --bg: #101010;
@@ -21,14 +21,14 @@
             overflow-x: hidden;
         }
 
-        /* 1. STATE MANAGEMENT (Hiding/Showing Views) */
+        /* 1. STATE MANAGEMENT */
         .view-home { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 97.511469999vh; }
         .view-results { display: none; }
 
         body.results-active .view-home { display: none; }
         body.results-active .view-results { display: block; }
 
-        /* 2. HEADER (Visible on Results View) */
+        /* 2. HEADER */
         header {
             display: flex; align-items: center;
             padding: 10px 30px; background: var(--panel);
@@ -37,8 +37,7 @@
         }
 
         .header-logo {
-            font-weight: 900; color: var(--accent);
-            margin-right: 30px; cursor: pointer; text-transform: uppercase;
+            font-weight: 400; color: var(--accent);
         }
 
         /* 3. SEARCH BAR STYLING */
@@ -54,9 +53,19 @@
         .search-input {
             flex: 1; background: transparent; border: none;
             color: white; font-size: 16px; outline: none;
+            padding-left: 10px;
         }
 
-        .search-trigger { cursor: pointer; display: flex; align-items: center; }
+        .icon-btn { 
+            cursor: pointer; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center;
+            padding: 0 5px;
+            transition: opacity 0.2s;
+        }
+
+        .icon-btn:hover { opacity: 0.8; }
 
         /* 4. HOME SPECIFIC */
         .home-logo {
@@ -64,7 +73,7 @@
             letter-spacing: -1px; margin-bottom: 25px;
         }
 
-        /* 5. RESULTS CONTAINER (Fixed 1000px) */
+        /* 5. RESULTS CONTAINER */
         .results-wrapper {
             width: 1000px; margin: 30px auto; padding: 0 20px; box-sizing: border-box;
         }
@@ -78,33 +87,44 @@
         .gs-snippet { color: #aaa !important; line-height: 1.5 !important; }
         .gsc-url-top, .gs-visibleUrl { color: #4caf50 !important; }
         .gsc-search-box, .gcsc-branding, .gsc-adBlock { display: none !important; }
-        .gsc-tabHeader{border: 1px solid white !important;background-color:#101010 !important;color:white !important;}
+        .gsc-tabHeader{ border: 1px solid white !important; background-color:#101010 !important; color:white !important; }
+        
+        .powered-tag { position: absolute; top: 10px; left: 10px; opacity: 0.5; }
+        .space{ width:;
     </style>
 </head>
 <body>
 
-    <!-- HOME VIEW -->
+    <div class="powered-tag">
         <small><small><small><h6>Powered by Google</h6></small></small></small>
+    </div>
+
+    <!-- HOME VIEW -->
     <div id="home-state" class="view-home">
-        <div class="home-logo">Search</DIV>
+        <div class="home-logo">Search</div>
         <div class="search-box">
+
             <input type="text" id="home-input" class="search-input" placeholder="Search..." autofocus>
-            <div class="search-trigger" onclick="runSearch('home-input')">
-                <img class="searchicon" src="https://static.vecteezy.com/system/resources/previews/015/337/677/original/transparent-search-icon-free-png.png" width="45px" style="margin-right:-10px;">
+
+                            <div class="icon-btn" onclick="runSearch('home-input')">
+                                <div class="space"></div>
+<svg aria-hidden="true" width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path class="gray70_fill_sb" d="M10.4167 0C15.7555 0 20.0833 4.32792 20.0833 9.66667C20.0833 11.9759 19.2736 14.0959 17.9227 15.7584L24.4571 22.2929C24.8476 22.6835 24.8476 23.3165 24.4571 23.7071C24.1021 24.0621 23.5465 24.0944 23.1551 23.8039L23.0429 23.7071L16.5084 17.1727C14.8459 18.5236 12.7259 19.3333 10.4167 19.3333C5.07792 19.3333 0.75 15.0055 0.75 9.66667C0.75 4.32792 5.07792 0 10.4167 0ZM10.4167 2C6.18248 2 2.75 5.43248 2.75 9.66667C2.75 13.9008 6.18248 17.3333 10.4167 17.3333C14.6508 17.3333 18.0833 13.9008 18.0833 9.66667C18.0833 5.43248 14.6508 2 10.4167 2Z" fill="#767676"></path></svg>
+            </div>
             </div>
         </div>
-    </div>
+
 
     <!-- RESULTS VIEW -->
     <div id="results-state" class="view-results">
         <header>
-            <div class="header-logo" onclick="location.href=location.pathname"></div>
-            <div class="search-box" style="width: 450px; height: 38px;">
+            <div class="header-logo" onclick="location.href=location.pathname">Search‎ </div>
+            <div class="search-box" style="width: 550px; height: 38px;">
+
                 <input type="text" id="header-input" class="search-input">
-                <div class="search-trigger" onclick="runSearch('header-input')">
-                    <img class="searchicon" src="https://static.vecteezy.com/system/resources/previews/015/337/677/original/transparent-search-icon-free-png.png" width="30px" style="margin-right:-10px;">
+                                    <div class="icon-btn" onclick="runSearch('header-input')">
+                                    <svg aria-hidden="true" width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path class="gray70_fill_sb" d="M10.4167 0C15.7555 0 20.0833 4.32792 20.0833 9.66667C20.0833 11.9759 19.2736 14.0959 17.9227 15.7584L24.4571 22.2929C24.8476 22.6835 24.8476 23.3165 24.4571 23.7071C24.1021 24.0621 23.5465 24.0944 23.1551 23.8039L23.0429 23.7071L16.5084 17.1727C14.8459 18.5236 12.7259 19.3333 10.4167 19.3333C5.07792 19.3333 0.75 15.0055 0.75 9.66667C0.75 4.32792 5.07792 0 10.4167 0ZM10.4167 2C6.18248 2 2.75 5.43248 2.75 9.66667C2.75 13.9008 6.18248 17.3333 10.4167 17.3333C14.6508 17.3333 18.0833 13.9008 18.0833 9.66667C18.0833 5.43248 14.6508 2 10.4167 2Z" fill="#767676"></path></svg>
                 </div>
-            </div>
+                </div>
         </header>
 
         <main class="results-wrapper">
@@ -123,16 +143,13 @@
             const query = document.getElementById(id).value.trim();
             if (!query) return;
 
-            // 1. Activate Results UI
             document.body.classList.add('results-active');
             rInput.value = query;
 
-            // 2. Sync URL with /?q=
             const url = new URL(window.location);
             url.searchParams.set('q', query);
             window.history.pushState({}, '', url);
 
-            // 3. Trigger Mechanism
             const execute = () => {
                 const gInput = document.querySelector('input.gsc-input');
                 const gBtn = document.querySelector('button.gsc-search-button');
@@ -147,11 +164,11 @@
             execute();
         }
 
-        // Enter Key Handlers
+      
+
         hInput.addEventListener('keydown', e => { if(e.key === 'Enter') runSearch('home-input'); });
         rInput.addEventListener('keydown', e => { if(e.key === 'Enter') runSearch('header-input'); });
 
-        // Handle URL on load
         window.onload = () => {
             const params = new URLSearchParams(window.location.search);
             const q = params.get('q');
@@ -161,7 +178,6 @@
             }
         };
 
-        // Handle browser Back/Forward
         window.onpopstate = () => {
             const params = new URLSearchParams(window.location.search);
             const q = params.get('q') || '';
