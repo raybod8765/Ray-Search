@@ -20,7 +20,9 @@
             font-family: 'Segoe UI', Roboto, sans-serif;
             overflow-x: hidden;
         }
-
+main {
+  display: block;
+}
         /* 1. STATE MANAGEMENT */
         .view-home { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 97.511469999vh; }
         .view-results { display: none; }
@@ -189,5 +191,8 @@
             }
         };
     </script>
+    <script>
+document.createElement("main");
+</script>
 </body>
 </html>
