@@ -1,0 +1,290 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Search</title>
+
+<style>
+/* variables manually inlined */
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #101010;
+    color: #ffffff;
+    font-family: 'Segoe UI', Roboto, sans-serif;
+    overflow-x: hidden;
+}
+
+/* STATE */
+.view-home {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 97.5vh;
+}
+.view-results { display: none; }
+
+body.results-active .view-home { display: none; }
+body.results-active .view-results { display: block; }
+
+/* HEADER */
+header {
+    display: flex;
+    align-items: center;
+    padding: 10px 30px;
+    background: #16161a;
+    border-bottom: 1px solid #333;
+    position: sticky;
+    top: 0;
+    z-index: 9999;
+}
+
+.header-logo {
+    font-weight: 400;
+    color: #5fa5ff;
+}
+
+/* SEARCH BOX */
+.search-box {
+    display: flex;
+    align-items: center;
+    background: #000;
+    border: 1px solid #444;
+    border-radius: 100px;
+    width: 500px;
+    height: 45px;
+    padding: 0 15px;
+    transition: border-color 0.3s;
+}
+
+.search-box:focus-within {
+    border-color: #5fa5ff;
+}
+/* FORCE GOOGLE CSE DARK MODE + HIDE THEIR UI */
+.gsc-control-cse,
+.gsc-control-cse * {
+    background-color: transparent !important;
+    color: #ffffff !important;
+    border-color: transparent !important;
+}
+
+/* REMOVE THEIR SEARCH BAR COMPLETELY */
+.gsc-search-box,
+.gsc-input-box,
+.gsc-search-button,
+.gsc-clear-button,
+.gcsc-branding {
+    display: none !important;
+}
+
+/* REMOVE WHITE BOXES */
+.gsc-results-wrapper-nooverlay,
+.gsc-resultsRoot,
+.gsc-webResult,
+.gsc-result,
+.gsc-expansionArea {
+    background-color: transparent !important;
+}
+
+/* TEXT COLORS */
+.gs-title, .gs-title b {
+    color: #5fa5ff !important;
+}
+
+.gs-snippet {
+    color: #aaaaaa !important;
+}
+
+.gs-visibleUrl {
+    color: #4caf50 !important;
+}
+
+/* REMOVE OUTLINES / TABLE BACKGROUNDS */
+.gsc-table-result,
+.gsc-thumbnail-inside {
+    background: transparent !important;
+    border: none !important;
+}
+
+/* TABS (Web / Image) */
+.gsc-tabHeader {
+    background: #101010 !important;
+    color: #ffffff !important;
+    border: 1px solid #333 !important;
+}
+
+/* REMOVE ADS BLOCK */
+.gsc-adBlock {
+    display: none !important;
+}
+.search-input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 16px;
+    outline: none;
+    padding-left: 10px;
+}
+
+.icon-btn {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 5px;
+    transition: opacity 0.2s;
+}
+
+.icon-btn:hover { opacity: 0.8; }
+
+/* HOME */
+.home-logo {
+    font-size: 80px;
+    font-weight: 400;
+    color: #5fa5ff;
+    letter-spacing: -1px;
+    margin-bottom: 25px;
+}
+
+/* RESULTS */
+.results-wrapper {
+    width: 1000px;
+    margin: 30px auto;
+    padding: 0 20px;
+}
+
+/* GOOGLE OVERRIDES */
+.gs-title, .gs-title b, .gsc-control-cse a {
+    color: #5fa5ff !important;
+    text-decoration: none !important;
+}
+
+.gs-snippet { color: #aaa !important; }
+.gsc-url-top { color: #4caf50 !important; }
+</style>
+
+<script type="text/javascript">
+
+function getById(id) {
+    return document.getElementById(id);
+}
+
+function trimText(str) {
+    return str.replace(/^\s+|\s+$/g, '');
+}
+
+function setResultsMode() {
+    document.body.className = "results-active";
+}
+
+function runSearch(id) {
+    var input = getById(id);
+    if (!input) return;
+
+    var query = trimText(input.value);
+    if (!query) return;
+
+    setResultsMode();
+
+    var header = getById("header-input");
+    if (header) header.value = query;
+
+    function tryRun() {
+        var inputs = document.getElementsByTagName("input");
+        var buttons = document.getElementsByTagName("button");
+
+        var gInput = null;
+        var gBtn = null;
+
+        var i, j;
+
+        for (i = 0; i < inputs.length; i++) {
+            if (inputs[i].className.indexOf("gsc-input") !== -1) {
+                gInput = inputs[i];
+                break;
+            }
+        }
+
+        for (j = 0; j < buttons.length; j++) {
+            if (buttons[j].className.indexOf("gsc-search-button") !== -1) {
+                gBtn = buttons[j];
+                break;
+            }
+        }
+
+        if (gInput && gBtn) {
+            gInput.value = query;
+            setTimeout(function () {
+                gBtn.click();
+            }, 100);
+        } else {
+            setTimeout(tryRun, 200);
+        }
+    }
+
+    tryRun();
+}
+
+window.onload = function () {
+    var hash = window.location.hash;
+
+    if (hash && hash.indexOf("q=") !== -1) {
+        try {
+            var q = hash.split("q=")[1];
+            if (q) {
+                q = decodeURIComponent(q);
+                getById("home-input").value = q;
+                runSearch("home-input");
+            }
+        } catch (e) {}
+    }
+};
+
+</script>
+
+</head>
+
+<body>
+
+<div class="view-home">
+    <div class="home-logo">Search</div>
+
+    <div class="search-box">
+        <input type="text" id="home-input" class="search-input"
+        onkeydown="if(event.keyCode==13) runSearch('home-input')"
+        placeholder="Search...">
+
+        <div class="icon-btn" onclick="runSearch('home-input')">
+<img src="https://raybod8765.github.io/Ray-Search/searchicon.svg">
+        </div>
+    </div>
+</div>
+
+<div class="view-results">
+
+    <header>
+        <div class="header-logo">Search</div>
+
+        <div class="search-box" style="width:550px;height:38px;">
+            <input type="text" id="header-input" class="search-input"
+            onkeydown="if(event.keyCode==13) runSearch('header-input')">
+
+            <div class="icon-btn" onclick="runSearch('header-input')">
+<img src="https://raybod8765.github.io/Ray-Search/searchicon.svg">
+            </div>
+        </div>
+    </header>
+
+    <div class="results-wrapper">
+        <script async src="https://cse.google.com/cse.js?cx=27ef92da79bde4273"></script>
+        <div class="gcse-search"></div>
+    </div>
+
+</div>
+
+</body>
+</html>
